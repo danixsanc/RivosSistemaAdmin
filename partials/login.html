@@ -1,0 +1,35 @@
+<nav class="deep-purple darken-4">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Iniciar Sesion</a>
+    </div>
+</nav>
+
+
+<div class="container" style="margin-top:10%">
+    <div class="row">
+        <form name="loginForm" role="form">
+
+        <div class="row">
+            <div class="input-field col m6 offset-m3">
+                 <input id="Email" type="text" class="validate" name="Email" ng-model="login.Email" required/>
+                 <label for="Email">Correo / Telefono</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col m6 offset-m3">
+                <input type="password" class="validate" ng-model="login.password" required/>
+                <label for="password">Contraseña</label>
+            </div> 
+        </div>
+        
+        <div class="row">
+            <div class="col m4 offset-m4">
+                <button class="col m8 offset-m2 btn waves-effect waves-light deep-purple darken-4" type="submit" ng-click="doLogin(login)" data-ng-disabled="loginForm.$invalid" name="action">Entrar<i class="material-icons right">lock_open</i>
+                </button>
+            </div>
+        </div>
+        
+        </form>
+    </div>
+</div>

@@ -1,0 +1,232 @@
+<!--BOTON FLOTANTE-->
+<div ng-click="cargarModalAdmin(1, false, false, true, 'Agregar')" class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+  </a>
+</div>
+
+<!--BUSCADOR-->
+<nav class="indigo lighten-2">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" ng-model="buscador" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons" ng-click="buscador=null">close</i>
+        </div>
+      </form>
+    </div>
+</nav>
+
+
+<!--VENTANA MODAL-->
+<div id="modalAdmin" class="modal modal-fixed-footer">
+
+
+      <h4 style="margin:8px;">{{nameWindow}} Admin</h4>
+    
+  <div class="modal-content">
+    
+
+    <div class="row">
+      <div class="input-field col m8 offset-m2">
+        <i class="material-icons prefix">person</i>
+        <input id="admin_name" type="text" ng-disabled="lectura" ng-model="datosAdmin.company" required>
+        <label for="admin_company" for="admin_compay" ng-class="{active: datosAdmin.company}">Compañia</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col m8 offset-m2">
+        <i class="material-icons prefix">email</i>
+        <input id="admin_email" type="email" ng-disabled="lectura" ng-model="datosAdmin.email" required>
+        <label for="admin_email" ng-class="{active: datosAdmin.email}">Correo</label>
+      </div>
+    </div>
+
+
+
+
+    <div class="row">
+      <div class="input-field col m8 offset-m2">
+        <i class="material-icons prefix">phone</i>
+        <input id="admin_phone" type="text" ng-disabled="lectura" ng-model="datosAdmin.phone" required>
+        <label for="admin_phone" ng-class="{active: datosAdmin.phone}">Telefono</label>
+      </div>
+    </div>
+
+
+        <div class="row" ng-show="agregar">
+            <div class="input-field col m8 offset-m2">
+                <i class="material-icons prefix">lock</i>
+                    <input id="admin_password" type="password" ng-model="datosAdmin.password" required>
+                <label for="admin_password" ng-class="{active: datosAdmin.password}">Contraseña</label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="agregar">
+            <div class="input-field col m8 offset-m2">
+                <i class="material-icons prefix">lock</i>
+                    <input id="admin_passwordrepeat" type="password" ng-model="datosAdmin.passwordrepeat" required>
+                <label for="admin_passwordrepeat" ng-class="{active: datosAdmin.passwordrepeat}">Repetir Contraseña</label>
+            </div>
+        </div>
+
+  </div>
+
+
+  <div class="modal-footer">
+        <a  
+            href="" 
+            ng-show="agregar" 
+            ng-click="addAdminData(datosAdmin)" 
+            class="green modal-action waves-effect waves-green btn">
+            Agregar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="lectura" 
+            class="green modal-action modal-close waves-effect waves-green btn">
+            Aceptar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="modificar" 
+            ng-click="updateAdminData(datosAdmin)" 
+            class="green modal-action waves-effect waves-green btn">
+            Guardar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="modificar||agregar" 
+            class="red modal-action modal-close waves-effect waves-red btn">
+            Cancelar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="modificar||agregar" 
+            ng-click="limpiarCamposAdmin()" 
+            class="blue modal-action waves-effect waves-blue btn">
+            Limpiar
+        </a>
+    </div>
+</div>
+
+
+
+<!--VENTANA MODAL-->
+<div id="modalPayment" class="modal1 modal-fixed-footer">
+      <h4 style="margin:8px;">Pagos
+      <a style="font-size:14px; margin-left:80%" 
+            href="" 
+            class="red modal-action modal-close waves-effect waves-red btn">
+            Salir
+        </a>
+
+    </h4>
+  <nav class="indigo lighten-2">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search1" type="search" ng-model="buscador1" required>
+          <label for="search1"><i class="material-icons">search</i></label>
+          <i class="material-icons" ng-click="buscador1=null">close</i>
+        </div>
+      </form>
+    </div>
+</nav>
+
+  <div class="modal-content grey lighten-3">
+    <table class="bordered highlight centered">
+        <thead>
+          <tr>
+              <th data-field="name">Colonia</th>
+              <th data-field="name">Precio</th>
+              <th data-field="name">Acciones</th>
+          </tr>
+        </thead>
+<tbody> 
+
+        <tr ng-repeat="itemAdmin2 in lista2">
+          <td>{{ itemAdmin2.name }}</td>
+          <td>{{ itemAdmin2.json_admin }}</td>
+         <td> <a ng-click="cargarModalColony(itemAdmin2)" class="btn-floating btn-flat waves-effect waves-light">
+                <i class="blue-text material-icons">mode_edit</i>
+            </a></td>
+
+
+
+        </tr>
+      </tbody>
+      </table>
+
+  </div>
+</div>
+
+
+<!--VENTANA MODAL ELIMINAR-->
+<div id="modalDeleteAdmin" class="modal deep-orange lighten-2">
+    <div class="card deep-orange lighten-1">
+        <div class="card-content white-text">
+            <span class="card-title">Eliminar</span>
+            <p>Seguro que desea eliminar a</p>
+            <p>{{ companyAdmin }} ?</p>
+            <i class="xtralarge material-icons">delete</i>
+        </div>
+        <div class="card-action">
+            <a ng-click="deleteAdminData(admin_id_Admin)" class="modal-action modal-close white waves-effect red-text waves-white btn">Eliminar</a>
+            <a class="red modal-action modal-close waves-effect waves-red white-text btn">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+<!--TABLA DE DATOS-->
+<div ng-init="cargaDatosAdmin()">
+  <table class="bordered highlight centered">
+      <thead>
+        <tr>
+            <th data-field="name">Identificador</th>
+            <th data-field="name">Nombre</th>
+            <th data-field="email">Telefono</th>
+            <th data-field="phone">Correo</th>
+            <th data-field="action">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody> 
+        <tr ng-repeat="itemAdmin in lista|filter:buscador">
+          <td>{{ itemAdmin.admin_id }}</td>
+          <td>{{ itemAdmin.company }}</td>
+          <td>{{ itemAdmin.phone }}</td>
+          <td>{{ itemAdmin.email }}</td>
+
+          <td id="actions_admin">
+          
+          <a ng-click="cargarModalPayment(itemAdmin.admin_id)" class="btn-floating btn-flat waves-effect waves-light">
+            <i class="orange-text material-icons">attach_money</i>
+            </a>
+
+            <a ng-click="cargarModalAdmin(itemAdmin.admin_id, true, false, false, 'Ver')" class="btn-floating btn-flat waves-effect waves-light">
+                <i class="green-text material-icons">search</i>
+            </a>
+            <a ng-click="cargarModalAdmin(itemAdmin.admin_id,false, true, false, 'Editar')" class="btn-floating btn-flat waves-effect waves-light">
+                <i class="blue-text material-icons">mode_edit</i>
+            </a>
+            <a ng-click="deleteModalAdmin(itemAdmin)" class="btn-floating btn-flat waves-effect waves-light">
+                <i class="red-text material-icons">delete</i>
+            </a>
+          </td>
+
+
+
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,88 @@
+
+
+<!--BUSCADOR-->
+<nav class="indigo lighten-2">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" ng-model="buscador" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons" ng-click="buscador=null">close</i>
+        </div>
+      </form>
+    </div>
+</nav>
+
+<!--VENTANA MODAL-->
+<div id="modalRequest" class="modal modal-fixed-footer">
+    <h4 style="margin:8px;">{{nameWindow}} Request</h4> 
+    
+
+    <div class="modal-content">
+        <div class="row">
+            <div class="input-field col m8 offset-m2">
+                <i class="material-icons prefix">schedule</i>
+                    <input id="date" type="text" ng-disabled="lectura" ng-model="datosRequest.date" required>
+                <label id="date" for="date" ng-class="{active: datosRequest.date}">Nombre</label>
+            </div>
+        </div>
+        </div>
+
+
+     <div class="modal-footer">
+        
+          <a 
+            href="" 
+            ng-show="lectura" 
+            class="green modal-action modal-close waves-effect waves-green btn">
+            Aceptar
+        </a>
+    
+  
+        </div>
+    </div>
+
+
+<!--VENTANA MODAL ELIMINAR
+<div id="modalDeleteCabbie" class="modal deep-orange lighten-2">
+    <div class="card deep-orange lighten-1">
+        <div class="card-content white-text">
+            <span class="card-title">Eliminar</span>
+            <p>Seguro que desea eliminar a</p>
+            <p>{{ companyAdmin }} ?</p>
+            <i class="xtralarge material-icons">delete</i>
+        </div>
+        <div class="card-action">
+            <a ng-click="deleteCabbieData(cabbie_id)" class="modal-action modal-close white waves-effect red-text waves-white btn">Eliminar</a>
+            <a class="red modal-action modal-close waves-effect waves-red white-text btn">Cancelar</a>
+        </div>
+    </div>
+</div>-->
+
+
+<!--TABLA DE DATOS-->
+<div ng-init="cargarDatosRequest()">
+  <table class="bordered highlight centered">
+      <thead>
+        <tr>
+            <th data-field="request_id">Identificador</th>
+            <th data-field="date">Fecha</th>
+            <th data-field="action">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="itemRequest in lista|filter:buscador">
+          <td>{{ itemRequest.request_id }}</td>
+          <td>{{ itemRequest.date | date : format : timezone }}</td>
+        
+          <td id="actions_cabbie">
+                    <a ng-click="cargarModalRequest(itemRequest.request_id, true, false, false, 'Ver')" class="btn-floating btn-flat waves-effect waves-light">
+                        <i class="green-text material-icons">search</i>
+                    </a>
+                    
+                </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

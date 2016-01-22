@@ -1,0 +1,140 @@
+<!--BOTON FLOTANTE
+<div ng-click="cargarModalColony(1, false, false, true, 'Agregar')" class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+  </a>
+</div>-->
+
+<!--BUSCADOR-->
+<nav class="indigo lighten-2">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" ng-model="buscador" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons" ng-click="buscador=null">close</i>
+        </div>
+      </form>
+    </div>
+</nav>
+
+
+
+<!--TABLA DE DATOS-->
+<div ng-init="cargarDatosColony()">
+    <table class="bordered highlight centered" ng-table="table1">
+        <thead>
+            <tr>
+                <th data-field="uid">Identificador</th>
+                <th data-field="Name">Nombre</th>
+               <th data-field="price">Precio</th>
+                <th data-field="action">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="itemColony in lista|filter:buscador">
+                <td>{{ itemColony.uid }}</td>
+                <td>{{ itemColony.Name }}</td>
+                <td>{{ itemColony.price | currency:'' }}</td>
+                <td id="actions_colony">
+                    <a ng-click="cargarModalColony(itemColony.uid, true, false, false, 'Ver')" class="btn-floating btn-flat waves-effect waves-light">
+                        <i class="green-text material-icons">search</i>
+                    </a>
+                    <a ng-click="cargarModalColony(itemColony.uid,false, true, false, 'Editar')" class="btn-floating btn-flat waves-effect waves-light">
+                        <i class="blue-text material-icons">mode_edit</i>
+                    </a>
+                    <a ng-click="deleteModalColony(itemColony)" class="btn-floating btn-flat waves-effect waves-light">
+                        <i class="red-text material-icons">delete</i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--VENTANA MODAL-->
+<div id="modalColony" class="modal modal-fixed-footer">
+    <h4 style="margin:8px;">{{nameWindow}} Colony</h4> 
+    
+
+    <div class="modal-content">
+        <div class="row">
+            <div class="input-field col m8 offset-m2">
+                <i class="material-icons prefix">person</i>
+                    <input id="Name" type="text"  ng-disabled="modificar||lectura" ng-model="datosColony.Name"  required>
+                <label id="Name" for="Name" ng-class="{active: datosColony.Name}">Nombre</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col m8 offset-m2">
+                <i class="material-icons prefix">attach_money</i>
+                    <input id="price" type="text" ng-disabled="lectura" ng-model="datosColony.price" required>
+                <label for="price" id="price" ng-class="{active: datosColony.price}">Precio</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+
+        <a 
+            href="" 
+            ng-show="lectura" 
+            class="green modal-action modal-close waves-effect waves-green btn">
+            Aceptar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="modificar" 
+            ng-click="updateColonyData(datosColony)" 
+            class="green modal-action waves-effect waves-green btn">
+            Guardar
+        </a>
+
+
+        <a 
+            href="" 
+            ng-show="modificar||agregar" 
+            class="red modal-action modal-close waves-effect waves-red btn">
+            Cancelar
+        </a>
+
+        <a 
+            href="" 
+            ng-show="modificar||agregar" 
+            ng-click="limpiarCamposColony()" 
+            class="blue modal-action waves-effect waves-blue btn">
+            Limpiar
+        </a>
+   		
+	</div>
+</div>
+
+
+
+<!--VENTANA MODAL ELIMINAR-->
+<div id="modalDeleteColony" class="modal deep-orange lighten-2">
+    <div class="card deep-orange lighten-1">
+        <div class="card-content white-text">
+            <span class="card-title">Eliminar</span>
+            <p>Seguro que desea eliminar a</p>
+            <p>{{ colony_name }} ?</p>
+            <i class="xtralarge material-icons">delete</i>
+        </div>
+        <div class="card-action">
+            <a ng-click="deleteColonyData(uid)" class="modal-action modal-close white waves-effect red-text waves-white btn">Eliminar</a>
+            <a class="red modal-action modal-close waves-effect waves-red white-text btn">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
